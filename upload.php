@@ -1,27 +1,18 @@
 <?php
-// Verifica si se recibió un archivo
+// Verifica si se ha enviado un archivo
 if ($_FILES['file']) {
-    // Nombre del archivo
+    // Nombre y ubicación del archivo en el servidor
     $fileName = $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileDestination = 'uploads/' . $fileName;
 
-    // Ruta donde se almacenarán los archivos en el servidor (directorio actual)
-    $uploadDirectory = dirname(__FILE__) . '/';
-
-    // Ruta completa del archivo en el servidor
-    $uploadPath = $uploadDirectory . $fileName;
-
-    // Verifica si el archivo ya existe en el directorio de carga
-    if (file_exists($uploadPath)) {
-        echo 'El archivo ya existe.';
+    // Mueve el archivo cargado al destino final en el servidor
+    if (move_uploaded_file($fileTmpName, $fileDestination)) {
+        echo '¡El archivo se ha subido exitosamente!';
     } else {
-        // Verifica si el archivo se ha subido correctamente
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadPath)) {
-            echo 'Archivo subido exitosamente.';
-        } else {
-            echo 'Error al subir el archivo.';
-        }
+        echo '¡Error al subir el archivo!';
     }
 } else {
-    echo 'No se recibió ningún archivo.';
+    echo '¡No se ha recibido ningún archivo!';
 }
 ?>
