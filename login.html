@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(120deg, #3498db, #8e44ad);
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            max-width: 80%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container h2 {
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container input[type="text"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6ab04c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .container button:hover {
+            background-color: #4e8a36;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .options button {
+            padding: 10px 20px;
+            background-color: #6ab04c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .options button:hover {
+            background-color: #4e8a36;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3) 70%);
+            z-index: -1;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Nombre de Usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <div class="options">
+                <button id="andyBtn">Andy</button>
+                <button id="fernandaBtn">Fernanda</button>
+            </div>
+            <button type="submit">Iniciar Sesión</button>
+            <div class="error-message" id="loginError" style="display: none;">Nombre de usuario o contraseña incorrectos.</div>
+        </form>
+    </div>
+
+    <script>
+        const andyBtn = document.getElementById('andyBtn');
+        const fernandaBtn = document.getElementById('fernandaBtn');
+
+        andyBtn.addEventListener('click', function () {
+            document.getElementById('username').value = 'Andy';
+        });
+
+        fernandaBtn.addEventListener('click', function () {
+            document.getElementById('username').value = 'Fernanda';
+        });
+
+        const usuariosPredeterminados = [
+            { username: 'Andy', password: 'ferdi' },
+            { username: 'Fernanda', password: 'ferdi' }
+        ];
+
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const usuarioValido = usuariosPredeterminados.find(user => user.username === username && user.password === password);
+
+            if (usuarioValido) {
+                window.location.href = 'amor.html'; // Cambia 'index.html' al nombre de tu archivo principal
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

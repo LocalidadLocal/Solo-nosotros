@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novela de Nuestra Vida 💕</title>
+    <style>
+        body {
+            background-color: #ffe6e6;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+            color: #333;
+        }
+
+        h1 {
+            color: #ff9999;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #ff6666;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff3333;
+        }
+
+        #novela {
+            background-color: #fff0f0;
+            border: 2px solid #ff6666;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease;
+            color: #333;
+        }
+
+        #novela textarea {
+            width: calc(100% - 22px);
+            height: 200px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ff6666;
+            resize: none;
+            color: #333;
+            background-color: #ffe6e6;
+        }
+
+        #novela button {
+            background-color: #ff6666;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #ff3333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #novela button:hover {
+            background-color: #ff3333;
+        }
+
+        #redireccionar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff6666;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #ff3333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        #redireccionar:hover {
+            background-color: #ff3333;
+        }
+
+        /* Estilos adicionales */
+        #novela input[type="text"],
+        #novela textarea {
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="novela">
+        <h1>Novela de Nuestra Vida 💕</h1>
+        <input type="text" id="tituloNovela" placeholder="Título de la novela">
+        <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..." rows="10" cols="50"></textarea>
+        <br>
+        <button onclick="guardarNovela()">Guardar Novela</button>
+        <button onclick="cargarNovela()">Cargar Novela Guardada</button>
+        <br>
+        <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
+        <button onclick="borrarNovela()">Borrar Novela</button>
+    </div>
+    <iframe id="reproductor" width="560" height="315" src="https://www.youtube.com/embed/XTSJyqBduPc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <a id="redireccionar" href="https://www.youtube.com/embed/bdOXnTbyk0g" target="_blank">¡Descubre más historias de amor!</a>
+
+    <script>
+       function guardarNovela() {
+    const titulo = document.getElementById('tituloNovela').value;
+    const contenido = document.getElementById('contenidoNovela').value;
+
+    // Envía los datos del formulario usando fetch
+    fetch('guardarNovela.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ titulo, contenido }),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Novela guardada con éxito.');
+        } else {
+            alert('Error al guardar la novela.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al enviar la solicitud:', error);
+    });
+}
+
+function borrarNovela() {
+    const titulo = document.getElementById('tituloNovela').value;
+    const password = document.getElementById('passwordNovela').value;
+
+    // Envía los datos del formulario usando fetch
+    fetch('borrarNovela.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ titulo, password }),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Novela borrada con éxito.');
+        } else {
+            alert('Error al borrar la novela.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al enviar la solicitud:', error);
+    });
+}
+
+function cargarNovelas() {
+    // Envía la solicitud para buscar todas las novelas guardadas
+    fetch('buscarNovelas.php')
+    .then(response => response.json())
+    .then(novelas => {
+        // Manejar la respuesta y mostrar las novelas en la interfaz de usuario
+        console.log(novelas);
+        // Por ejemplo, podrías mostrar las novelas en una lista
+        const listaNovelas = document.getElementById('listaNovelas');
+        listaNovelas.innerHTML = '';
+        novelas.forEach(novela => {
+            const itemNovela = document.createElement('li');
+            itemNovela.textContent = novela.titulo;
+            listaNovelas.appendChild(itemNovela);
+        });
+    })
+    .catch(error => {
+        console.error('Error al obtener las novelas:', error);
+    });
+}
+
+    </script>
+</body>
+
+</html>

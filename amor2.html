@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noche de Estrellas 🌟</title>
+    <style>
+        body {
+            background-color: #2c3e50;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+            overflow: hidden; /* Para ocultar las estrellas que se salgan del área visible */
+        }
+
+        /* Estrellas parpadeantes */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Para que esté detrás del contenido */
+        }
+
+        .stars:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://image.freepik.com/vector-gratis/fondo-noche-estrellada_1048-9569.jpg'); /* Imagen de fondo */
+            background-size: 1px 1px; /* Tamaño de la estrella */
+            animation: animateStars 50s linear infinite; /* Animación de estrellas */
+        }
+
+        @keyframes animateStars {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 10000px 5000px; /* Desplazamiento horizontal y vertical para simular movimiento */
+            }
+        }
+
+        h1 {
+            color: #ecf0f1;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #poema {
+            display: none;
+            padding: 20px;
+            font-size: 20px;
+            font-style: italic;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease, display 1s ease;
+        }
+
+        .playlist {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .playlist button {
+            background-color: #3498db;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 16px;
+            margin: 6px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .playlist button:hover {
+            background-color: #2980b9;
+        }
+
+        #ferPlaylist,
+        #andyPlaylist {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .novela-link {
+            background-color: #ff6666;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .novela-link:hover {
+            background-color: #ff3333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <h1>Noche de Estrellas 🌟</h1>
+    <div>
+        <button id="mostrar">¡Mostrar Música o Poema! 🎶</button>
+        <button id="masAmor">¡Más Amor! 😍</button>
+        <button id="nosotros">¡Nosotros! 💑</button>
+    </div>
+    <div id="ferPlaylist" class="playlist">
+        <button onclick="reproducir('https://www.youtube.com/embed/ymJ1svwvpLQ')">Fer 1</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/QlZNGcVfeF0')">Fer 2</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/x1ayw8GRJUo')">Fer 3</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/aSjflT_J0Xo')">Fer 4</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/U5yU2KPw1WY')">Fer 5</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/ZYslw-iBm8U')">Fer 6</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/Kbyp0QQM__g')">Fer 7</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/a1ozTSkE27U')">Fer 8</button>
+    </div>
+    <div id="andyPlaylist" class="playlist">
+        <button onclick="reproducir('https://www.youtube.com/embed/9QHiXsBtmmI')">Andy 1</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/LgQYPqr9Rho')">Andy 2</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/85qbNFHshdY')">Andy 3</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/yMETEHL2iTM')">Andy 4</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/jMNRg3nHwU0')">Andy 5</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/KWGrPNqz4uc')">Andy 6</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/f10mB6fKszU')">Andy 7</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/aBSkvI0CkgU')">Andy 8</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/_6XzJPyAJDI')">Andy 9</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/4THFRpw68oQ')">Andy 10</button>
+    </div>
+    <div id="poema">
+        Mi amor por ti es tan grande,
+        que ni los cielos lo pueden alcanzar.
+        Eres la luz que ilumina mi camino,
+        la razón por la que sonrío cada día.
+
+        Eres mi confidente, mi amigo, mi amante,
+        mi todo en una sola persona.
+        Eres mi complemento perfecto,
+        la persona con la que quiero pasar el resto de mi vida.
+
+        Tu belleza es tan cautivadora,
+        que no puedo resistir mirarte.
+        Tu risa es como música para mis oídos,
+        y tu voz es como una melodía celestial.
+
+        Quiero ser la mujer que te haga sonreír,
+        la que te proteja y te haga sentir amado.
+        Quiero estar a tu lado para siempre,
+        y hacerte sentir el hombre más afortunado del mundo.
+
+        Eres mi todo, mi razón de ser,
+        mi amor eterno y verdadero.
+        Te amo más allá de las palabras,
+        y espero que nunca lo dudes. ESPERA UN POCO POR FAVOR 🥰
+    </div>
+    <button class="novela-link" onclick="window.location.href = 'novela.html'">¡Descubre nuestra historia juntos!</button>
+    <button id="subirFoto" class="novela-link" onclick="window.location.href = 'subir_foto.html'">Subir Foto</button>
+    <script>
+        const mostrarBtn = document.querySelector("#mostrar");
+        const masAmorBtn = document.querySelector("#masAmor");
+        const nosotrosBtn = document.querySelector("#nosotros");
+        const poema = document.querySelector("#poema");
+        const ferPlaylist = document.querySelector("#ferPlaylist");
+        const andyPlaylist = document.querySelector("#andyPlaylist");
+        const listaDeReproduccion = [
+            'ymJ1svwvpLQ', 'QlZNGcVfeF0', 'x1ayw8GRJUo', 'aSjflT_J0Xo', 'U5yU2KPw1WY',
+            'ZYslw-iBm8U', 'Kbyp0QQM__g', 'a1ozTSkE27U', '9QHiXsBtmmI', 'LgQYPqr9Rho',
+            '85qbNFHshdY', 'yMETEHL2iTM', 'jMNRg3nHwU0', 'KWGrPNqz4uc', 'f10mB6fKszU',
+            'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ'
+        ];
+        let indiceCancionActual = 0;
+
+        const redirigir = function () {
+            window.location.href = "https://www.youtube.com/embed/bdOXnTbyk0g";
+        };
+
+        const reproducir = function (videoId) {
+            // Elimina cualquier iframe existente antes de crear uno nuevo
+            const iframeExistente = document.querySelector("#reproductor");
+            if (iframeExistente) {
+                iframeExistente.remove();
+            }
+
+            // Crea un nuevo iframe y establece sus atributos
+            const iframe = document.createElement("iframe");
+            iframe.src = videoId;
+            iframe.width = "560"; // Puedes ajustar el ancho según tus preferencias
+            iframe.height = "315"; // Puedes ajustar la altura según tus preferencias
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.id = "reproductor";
+
+            // Agrega el iframe al cuerpo del documento
+            document.body.appendChild(iframe);
+        };
+
+        const reproducirSiguiente = function () {
+            indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
+            reproducir(listaDeReproduccion[indiceCancionActual]);
+        };
+
+        mostrarBtn.addEventListener("click", function () {
+            const opcion = Math.random() < 0.5 ? "música" : "poema";
+            alert("Se mostrará un " + opcion);
+            if (opcion === "poema") {
+                poema.style.display = "block";
+            }
+        });
+
+        masAmorBtn.addEventListener("click", function () {
+            poema.style.display = "block";
+            setTimeout(redirigir, 40000);
+        });
+
+        nosotrosBtn.addEventListener("click", function () {
+            ferPlaylist.style.opacity = 1;
+            andyPlaylist.style.opacity = 1;
+        });
+
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                reproducirSiguiente();
+            }
+        }
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noche de Estrellas 🌟</title>
+    <style>
+        body {
+            background-color: #fffbf6;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+            color: #333;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff7e7e;
+        }
+
+        #poema {
+            padding: 20px;
+            font-size: 20px;
+            font-style: italic;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            background-color: #fff;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease, display 1s ease;
+            color: #333;
+        }
+
+        .playlist {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .playlist button {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 16px;
+            margin: 6px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .playlist button:hover {
+            background-color: #ff7e7e;
+        }
+
+        #ferPlaylist,
+        #andyPlaylist {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        #novela {
+            display: none;
+            background-color: #fff;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease;
+            color: #333;
+        }
+
+        #novela textarea {
+            width: calc(100% - 22px);
+            height: 200px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ff6b6b;
+            resize: none;
+            color: #333;
+            background-color: #f9f6f7;
+        }
+
+        #novela button {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #ff6b6b;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #novela button:hover {
+            background-color: #ff7e7e;
+        }
+
+        #nosotrosInfo {
+            display: none;
+            background-color: #fff;
+            border: 2px solid #ff6b6b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease;
+            color: #333;
+        }
+
+        #nosotrosInfo p {
+            margin-bottom: 10px;
+        }
+
+        #nosotrosInfo img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        #nosotrosInfo button {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #ff6b6b;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #nosotrosInfo button:hover {
+            background-color: #ff7e7e;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Noche de Estrellas 🌟</h1>
+    <button id="mostrar">Mostrar Música o Poema</button>
+    <button id="masAmor">Más Amor 😍</button>
+    <button id="nosotros">Nosotros</button>
+    <div id="ferPlaylist" class="playlist">
+        <button onclick="reproducir('https://www.youtube.com/embed/ymJ1svwvpLQ')">Fer 1</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/QlZNGcVfeF0')">Fer 2</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/x1ayw8GRJUo')">Fer 3</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/aSjflT_J0Xo')">Fer 4</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/U5yU2KPw1WY')">Fer 5</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/ZYslw-iBm8U')">Fer 6</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/Kbyp0QQM__g')">Fer 7</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/a1ozTSkE27U')">Fer 8</button>
+    </div>
+    <div id="andyPlaylist" class="playlist">
+        <button onclick="reproducir('https://www.youtube.com/embed/9QHiXsBtmmI')">Andy 1</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/LgQYPqr9Rho')">Andy 2</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/85qbNFHshdY')">Andy 3</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/yMETEHL2iTM')">Andy 4</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/jMNRg3nHwU0')">Andy 5</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/KWGrPNqz4uc')">Andy 6</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/f10mB6fKszU')">Andy 7</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/aBSkvI0CkgU')">Andy 8</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/_6XzJPyAJDI')">Andy 9</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/4THFRpw68oQ')">Andy 10</button>
+    </div>
+    <div id="poema">
+        Mi amor por ti es tan grande,
+        que ni los cielos lo pueden alcanzar.
+        Eres la luz que ilumina mi camino,
+        la razón por la que sonrío cada día.
+
+        Eres mi confidente, mi amigo, mi amante,
+        mi todo en una sola persona.
+        Eres mi complemento perfecto,
+        la persona con la que quiero pasar el resto de mi vida.
+
+        Tu belleza es tan cautivadora,
+        que no puedo resistir mirarte.
+        Tu risa es como música para mis oídos,
+        y tu voz es como una melodía celestial.
+
+        Quiero ser la mujer que te haga sonreír,
+        la que te proteja y te haga sentir amado.
+        Quiero estar a tu lado para siempre,
+        y hacerte sentir el hombre más afortunado del mundo.
+
+        Eres mi todo, mi razón de ser,
+        mi amor eterno y verdadero.
+        Te amo más allá de las palabras,
+        y espero que nunca lo dudes. ESPERA UN POCO POR FAVOR 🥰
+    </div>
+    <div id="novela">
+        <h2>Nuestra Novela de Vida</h2>
+        <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..."></textarea>
+        <br>
+        <button onclick="guardarNovela()">Guardar</button>
+        <button onclick="cargarNovela()">Cargar</button>
+    </div>
+    <div id="nosotrosInfo">
+        <h2>Nosotros</h2>
+        <img src="https://via.placeholder.com/400" alt="Nosotros">
+        <p>Somos un equipo de personas apasionadas por la música, el amor y la vida. Nos encanta compartir nuestras canciones favoritas y nuestros sentimientos más profundos a través de este espacio. ¡Esperamos que disfrutes tu estadía aquí!</p>
+        <button onclick="cerrarNosotros()">Cerrar</button>
+    </div>
+    <script>
+        const mostrarBtn = document.querySelector("#mostrar");
+        const masAmorBtn = document.querySelector("#masAmor");
+        const nosotrosBtn = document.querySelector("#nosotros");
+        const poema = document.querySelector("#poema");
+        const ferPlaylist = document.querySelector("#ferPlaylist");
+        const andyPlaylist = document.querySelector("#andyPlaylist");
+        const novela = document.querySelector("#novela");
+        const contenidoNovela = document.querySelector("#contenidoNovela");
+        const nosotrosInfo = document.querySelector("#nosotrosInfo");
+
+        const listaDeReproduccion = [
+            'ymJ1svwvpLQ', 'QlZNGcVfeF0', 'x1ayw8GRJUo', 'aSjflT_J0Xo', 'U5yU2KPw1WY',
+            'ZYslw-iBm8U', 'Kbyp0QQM__g', 'a1ozTSkE27U', '9QHiXsBtmmI', 'LgQYPqr9Rho',
+            '85qbNFHshdY', 'yMETEHL2iTM', 'jMNRg3nHwU0', 'KWGrPNqz4uc', 'f10mB6fKszU',
+            'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ'
+        ];
+        let indiceCancionActual = 0;
+
+        const redirigir = function () {
+            window.location.href = "https://www.youtube.com/embed/bdOXnTbyk0g";
+        };
+
+        const reproducir = function (videoId) {
+            // Elimina cualquier iframe existente antes de crear uno nuevo
+            const iframeExistente = document.querySelector("#reproductor");
+            if (iframeExistente) {
+                iframeExistente.remove();
+            }
+
+            // Crea un nuevo iframe y establece sus atributos
+            const iframe = document.createElement("iframe");
+            iframe.src = videoId;
+            iframe.width = "560"; // Puedes ajustar el ancho según tus preferencias
+            iframe.height = "315"; // Puedes ajustar la altura según tus preferencias
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.id = "reproductor";
+
+            // Agrega el iframe al cuerpo del documento
+            document.body.appendChild(iframe);
+        };
+
+        const reproducirSiguiente = function () {
+            indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
+            reproducir(listaDeReproduccion[indiceCancionActual]);
+        };
+
+        mostrarBtn.addEventListener("click", function () {
+            const opcion = Math.random() < 0.5 ? "música" : "poema";
+            alert("Se mostrará un " + opcion);
+            if (opcion === "poema") {
+                poema.style.display = "block";
+            }
+        });
+
+        masAmorBtn.addEventListener("click", function () {
+            poema.style.display = "block";
+            setTimeout(redirigir, 40000);
+        });
+
+        nosotrosBtn.addEventListener("click", function () {
+            ferPlaylist.style.display = "none";
+            andyPlaylist.style.display = "none";
+            novela.style.display = "none";
+            poema.style.display = "none";
+            nosotrosInfo.style.display = "block";
+        });
+
+        function cerrarNosotros() {
+            nosotrosInfo.style.display = "none";
+        }
+
+        function guardarNovela() {
+            localStorage.setItem("novela", contenidoNovela.value);
+            alert("Novela guardada exitosamente.");
+        }
+
+        function cargarNovela() {
+            const contenidoGuardado = localStorage.getItem("novela");
+            if (contenidoGuardado) {
+                contenidoNovela.value = contenidoGuardado;
+                alert("Novela cargada exitosamente.");
+            } else {
+                alert("No hay una novela guardada.");
+            }
+        }
+    </script>
+</body>
+
+</html>
