@@ -7,7 +7,7 @@
     <title>Noche de Estrellas 🌟</title>
     <style>
         body {
-            background-color: #34495e; /* Se cambió el color de fondo */
+            background-color: #2c3e50;
             text-align: center;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
@@ -19,7 +19,7 @@
             justify-content: center;
             height: 100vh;
             transition: background-color 0.5s ease;
-            overflow: hidden; /* Para ocultar las estrellas que se salgan del área visible */
+            overflow: auto; /* Mostrar barras de desplazamiento cuando sea necesario */
         }
 
         /* Estrellas parpadeantes */
@@ -139,11 +139,6 @@
         .novela-link:hover {
             background-color: #ff3333;
         }
-
-        #video-container {
-            width: 70%; /* Se aumentó el ancho del video */
-            margin-top: 20px; /* Se agregó margen superior */
-        }
     </style>
 </head>
 
@@ -178,7 +173,6 @@
         <button onclick="reproducir('https://www.youtube.com/embed/4THFRpw68oQ')">Andy 10</button>
         <button onclick="reproducir('https://www.youtube.com/embed/b1cbgrcBrY0')">Andy 11</button>
         <button onclick="reproducir('https://www.youtube.com/embed/hf5oi2c_jjM')">Andy 12</button>
-
     </div>
     <div id="video-container"></div>
 
@@ -251,8 +245,8 @@
             // Crea un nuevo iframe y establece sus atributos
             const iframe = document.createElement("iframe");
             iframe.src = videoId;
-            iframe.style.width = "100%"; // Ancho del iframe al 100% del contenedor
-            iframe.style.height = "400px"; // Altura fija del iframe
+            iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
+            iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
             iframe.id = "reproductor";
@@ -266,7 +260,7 @@
 
         const reproducirSiguiente = function () {
             indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
-            reproducir('https://www.youtube.com/embed/' + listaDeReproduccion[indiceCancionActual]);
+            reproducir(listaDeReproduccion[indiceCancionActual]);
         };
 
         mostrarBtn.addEventListener("click", function () {
