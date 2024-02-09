@@ -105,11 +105,14 @@
             background-color: #ff3333;
         }
 
-        /* Estilos adicionales */
-        #novela input[type="text"],
-        #novela textarea {
-            font-size: 16px;
-            font-family: 'Arial', sans-serif;
+        #listaNovelas {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #listaNovelas li {
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -121,84 +124,82 @@
         <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..." rows="10" cols="50"></textarea>
         <br>
         <button onclick="guardarNovela()">Guardar Novela</button>
-        <button onclick="cargarNovela()">Cargar Novela Guardada</button>
+        <button onclick="buscarNovela()">Buscar Novela</button>
         <br>
         <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
         <button onclick="borrarNovela()">Borrar Novela</button>
+        <ul id="listaNovelas"></ul> <!-- Aquí se mostrarán las novelas -->
     </div>
-    <iframe id="reproductor" width="560" height="315" src="https://www.youtube.com/embed/XTSJyqBduPc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <a id="redireccionar" href="https://www.youtube.com/embed/bdOXnTbyk0g" target="_blank">¡Descubre más historias de amor!</a>
 
     <script>
-       function guardarNovela() {
-    const titulo = document.getElementById('tituloNovela').value;
-    const contenido = document.getElementById('contenidoNovela').value;
+        function guardarNovela() {
+            const titulo = document.getElementById('tituloNovela').value;
+            const contenido = document.getElementById('contenidoNovela').value;
 
-    // Envía los datos del formulario usando fetch
-    fetch('guardarNovela.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ titulo, contenido }),
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Novela guardada con éxito.');
-        } else {
-            alert('Error al guardar la novela.');
+            // Envía los datos del formulario usando fetch
+            fetch('guardarNovela.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ titulo, contenido }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Novela guardada con éxito.');
+                    } else {
+                        alert('Error al guardar la novela.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al enviar la solicitud:', error);
+                });
         }
-    })
-    .catch(error => {
-        console.error('Error al enviar la solicitud:', error);
-    });
-}
 
-function borrarNovela() {
-    const titulo = document.getElementById('tituloNovela').value;
-    const password = document.getElementById('passwordNovela').value;
-
-    // Envía los datos del formulario usando fetch
-    fetch('borrarNovela.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ titulo, password }),
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Novela borrada con éxito.');
-        } else {
-            alert('Error al borrar la novela.');
+        function buscarNovela() {
+            // Envía la solicitud para buscar todas las novelas guardadas
+            fetch('buscarNovelas.php')
+                .then(response => response.json())
+                .then(novelas => {
+                    // Manejar la respuesta y mostrar las novelas en la interfaz de usuario
+                    console.log(novelas);
+                    // Por ejemplo, podrías mostrar las novelas en una lista
+                    const listaNovelas = document.getElementById('listaNovelas');
+                    listaNovelas.innerHTML = '';
+                    novelas.forEach(novela => {
+                        const itemNovela = document.createElement('li');
+                        itemNovela.textContent = novela.titulo;
+                        listaNovelas.appendChild(itemNovela);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al obtener las novelas:', error);
+                });
         }
-    })
-    .catch(error => {
-        console.error('Error al enviar la solicitud:', error);
-    });
-}
 
-function cargarNovelas() {
-    // Envía la solicitud para buscar todas las novelas guardadas
-    fetch('buscarNovelas.php')
-    .then(response => response.json())
-    .then(novelas => {
-        // Manejar la respuesta y mostrar las novelas en la interfaz de usuario
-        console.log(novelas);
-        // Por ejemplo, podrías mostrar las novelas en una lista
-        const listaNovelas = document.getElementById('listaNovelas');
-        listaNovelas.innerHTML = '';
-        novelas.forEach(novela => {
-            const itemNovela = document.createElement('li');
-            itemNovela.textContent = novela.titulo;
-            listaNovelas.appendChild(itemNovela);
-        });
-    })
-    .catch(error => {
-        console.error('Error al obtener las novelas:', error);
-    });
-}
+        function borrarNovela() {
+            const titulo = document.getElementById('tituloNovela').value;
+            const password = document.getElementById('passwordNovela').value;
 
+            // Envía los datos del formulario usando fetch
+            fetch('borrarNovela.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ titulo, password }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Novela borrada con éxito.');
+                    } else {
+                        alert('Error al borrar la novela.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al enviar la solicitud:', error);
+                });
+        }
     </script>
 </body>
 
