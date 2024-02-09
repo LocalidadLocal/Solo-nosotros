@@ -145,11 +145,13 @@
 <body>
     <div class="stars"></div>
     <h1>Noche de Estrellas 🌟</h1>
-    <div>
-        <button id="mostrar">¡Mostrar Música o Poema! 🎶</button>
-        <button id="masAmor">¡Más Amor uwu! 😍</button>
-        <button id="nosotros">¡Nosotros! 💑</button>
-    </div>
+   <div>
+    <button id="mostrar">¡Mostrar Música o Poema! 🎶</button>
+    <button id="masAmor">¡Más Amor uwu! 😍</button>
+    <button id="nosotros">¡Nosotros! 💑</button>
+    <button id="besame">¡Bésame! 💋</button>
+</div>
+
     <div id="ferPlaylist" class="playlist">
         <button onclick="reproducir('https://www.youtube.com/embed/ymJ1svwvpLQ')">Fer 1</button>
         <button onclick="reproducir('https://www.youtube.com/embed/QlZNGcVfeF0')">Fer 2</button>
@@ -292,7 +294,15 @@
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
                 }
-            });
+            });// Selecciona el botón "Bésame" por su ID
+const besameBtn = document.querySelector("#besame");
+
+// Agrega un evento de clic al botón "Bésame"
+besameBtn.addEventListener("click", function () {
+    // Reproduce la canción de YouTube cuando se hace clic en el botón
+    reproducir('https://youtu.be/biUYbAk-S1w');
+});
+
         }
 
         function onPlayerReady(event) {
