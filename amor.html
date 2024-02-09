@@ -231,13 +231,18 @@
         };
 
         const reproducir = function (videoId) {
-            // Elimina cualquier iframe existente antes de crear uno nuevo
-            const iframeExistente = document.querySelector("#reproductor");
-            if (iframeExistente) {
-                iframeExistente.remove();
-            }
+         // Elimina cualquier contenedor de video existente antes de crear uno nuevo
+const contenedorVideoExistente = document.querySelector("#contenedorVideo");
+if (contenedorVideoExistente) {
+    contenedorVideoExistente.remove();
+}
 
-      // Crea un nuevo iframe y establece sus atributos
+// Crea un nuevo contenedor para el video y establece sus atributos
+const contenedorVideo = document.createElement("div");
+contenedorVideo.id = "contenedorVideo";
+contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
+
+// Crea un nuevo iframe y establece sus atributos
 const iframe = document.createElement("iframe");
 iframe.src = videoId;
 iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
@@ -246,8 +251,12 @@ iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyros
 iframe.allowFullscreen = true;
 iframe.id = "reproductor";
 
-// Agrega el iframe al cuerpo del documento
-document.body.appendChild(iframe);
+// Agrega el iframe al contenedor de video
+contenedorVideo.appendChild(iframe);
+
+// Agrega el contenedor de video al cuerpo del documento
+document.body.appendChild(contenedorVideo);
+
         };
 
         const reproducirSiguiente = function () {
