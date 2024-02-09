@@ -237,17 +237,17 @@
                 iframeExistente.remove();
             }
 
-            // Crea un nuevo iframe y establece sus atributos
-            const iframe = document.createElement("iframe");
-            iframe.src = videoId;
-            iframe.width = "560"; // Puedes ajustar el ancho según tus preferencias
-            iframe.height = "315"; // Puedes ajustar la altura según tus preferencias
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-            iframe.allowFullscreen = true;
-            iframe.id = "reproductor";
+      // Crea un nuevo iframe y establece sus atributos
+const iframe = document.createElement("iframe");
+iframe.src = videoId;
+iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
+iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
+iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+iframe.allowFullscreen = true;
+iframe.id = "reproductor";
 
-            // Agrega el iframe al cuerpo del documento
-            document.body.appendChild(iframe);
+// Agrega el iframe al cuerpo del documento
+document.body.appendChild(iframe);
         };
 
         const reproducirSiguiente = function () {
@@ -255,17 +255,20 @@
             reproducir(listaDeReproduccion[indiceCancionActual]);
         };
 
-        mostrarBtn.addEventListener("click", function () {
-            const opcion = Math.random() < 0.5 ? "música" : "poema";
-            alert("Se mostrará un " + opcion);
-            if (opcion === "poema") {
-                poema.style.display = "block";
-            }
-        });
+  mostrarBtn.addEventListener("click", function () {
+    const opcion = "música"; // Establecer la opción como música
+    alert("Se mostrará " + opcion);
+    if (opcion === "música") {
+        ferPlaylist.style.opacity = 1;
+        andyPlaylist.style.opacity = 1;
+        poema.style.display = "none"; // Ocultar el poema si estaba visible
+    }
+});
+
 
         masAmorBtn.addEventListener("click", function () {
             poema.style.display = "block";
-            setTimeout(redirigir, 40000);
+            setTimeout(redirigir, 400);
         });
 
         nosotrosBtn.addEventListener("click", function () {
