@@ -260,24 +260,24 @@
         contenedorVideo.id = "contenedorVideo";
         contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
 
-        // Obtén el contenedor de video
-        const contenedorVideo = document.getElementById("video-container");
+       // Obtén el contenedor de video
+const contenedorVideo = document.getElementById("video-container");
 
-        // Crea un nuevo iframe y establece sus atributos
-        const iframe = document.createElement("iframe");
-        iframe.src = videoId;
-        iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
-        iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        iframe.allowFullscreen = true;
-        iframe.id = "reproductor";
+// Crea un nuevo iframe y establece sus atributos
+const iframe = document.createElement("iframe");
+iframe.src = videoId;
+iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
+iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
+iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+iframe.allowFullscreen = true;
+iframe.id = "reproductor";
 
-        // Agrega el iframe al contenedor de video
-        contenedorVideo.appendChild(iframe);
+// Agrega el iframe al contenedor de video
+contenedorVideo.appendChild(iframe);
 
-        // Agrega el contenedor de video al cuerpo del documento
-        document.body.appendChild(contenedorVideo);
-    };
+// Agrega el contenedor de video al cuerpo del documento
+document.body.appendChild(contenedorVideo);
+
 
     const reproducirSiguiente = function () {
         indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
