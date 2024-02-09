@@ -250,27 +250,23 @@
             document.body.appendChild(iframe);
         };
 
-        const poemaDiv = document.querySelector("#poema"); // Cambié el nombre de la variable para evitar conflictos
+        const reproducirSiguiente = function () {
+            indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
+            reproducir(listaDeReproduccion[indiceCancionActual]);
+        };
 
         mostrarBtn.addEventListener("click", function () {
-            // Ocultar el poema si estaba visible
-            poemaDiv.style.display = "none";
-
-            // Mostrar la música
-            musica.style.display = "none";
+            const opcion = Math.random() < 0.5 ? "música" : "poema";
+            alert("Se mostrará un " + opcion);
+            if (opcion === "poema") {
+                poema.style.display = "block";
+            }
         });
 
         masAmorBtn.addEventListener("click", function () {
-            // Ocultar la música si estaba visible
-            musica.style.display = "none";
-
-            // Mostrar el poema
-            poemaDiv.style.display = "none";
-
-            // Redirigir después de 40 segundos
-            setTimeout(redirigir, 400);
+            poema.style.display = "block";
+            setTimeout(redirigir, 40000);
         });
-
 
         nosotrosBtn.addEventListener("click", function () {
             ferPlaylist.style.opacity = 1;
@@ -283,7 +279,6 @@
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         let player;
-
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0',
@@ -308,3 +303,4 @@
 </body>
 
 </html>
+
