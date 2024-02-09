@@ -4,8 +4,8 @@ if ($_FILES['file']) {
     // Nombre del archivo
     $fileName = $_FILES['file']['name'];
 
-    // Ruta donde se almacenarán los archivos
-    $uploadDirectory = 'uploads/';
+    // Ruta donde se almacenarán los archivos en el servidor
+    $uploadDirectory = './uploads/';
 
     // Ruta completa del archivo en el servidor
     $uploadPath = $uploadDirectory . $fileName;
