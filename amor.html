@@ -246,12 +246,8 @@
 
             // Agrega el iframe al cuerpo del documento
             document.body.appendChild(iframe);
-        };
-
-        const reproducirSiguiente = function () {
-            indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
-            reproducir(listaDeReproduccion[indiceCancionActual]);
-      const musica = document.getElementById("musica");
+const musica = document.getElementById("musica");
+const poema = document.getElementById("poema"); // Asumiendo que tienes un elemento con id "poema"
 
 mostrarBtn.addEventListener("click", function () {
     // Ocultar el poema si estaba visible
@@ -261,10 +257,17 @@ mostrarBtn.addEventListener("click", function () {
     musica.style.display = "block";
 });
 
-        masAmorBtn.addEventListener("click", function () {
-            poema.style.display = "block";
-            setTimeout(redirigir, 40000);
-        });
+masAmorBtn.addEventListener("click", function () {
+    // Ocultar la música si estaba visible
+    musica.style.display = "none";
+
+    // Mostrar el poema
+    poema.style.display = "block";
+
+    // Redirigir después de 40 segundos
+    setTimeout(redirigir, 40000);
+});
+
 
         nosotrosBtn.addEventListener("click", function () {
             ferPlaylist.style.opacity = 1;
