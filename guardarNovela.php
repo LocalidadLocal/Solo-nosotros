@@ -1,7 +1,7 @@
 <?php
-// Recibir los datos del formulario
-$titulo = $_POST['titulo'];
-$contenido = $_POST['contenido'];
+// Recibir los datos del formulario y escaparlos
+$titulo = htmlspecialchars($_POST['titulo']);
+$contenido = htmlspecialchars($_POST['contenido']);
 
 // Conexión a la base de datos (cambiar los valores según tu configuración)
 $servername = "localhost";
@@ -17,15 +17,19 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// Preparar la consulta para insertar la novela en la base de datos
-$sql = "INSERT INTO novelas (titulo, contenido) VALUES ('$titulo', '$contenido')";
+// Preparar la consulta usando consultas preparadas
+$sql = "INSERT INTO novelas (titulo, contenido) VALUES (?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ss", $titulo, $contenido);
 
-if ($conn->query($sql) === TRUE) {
+// Ejecutar la consulta
+if ($stmt->execute()) {
     echo "Novela guardada con éxito.";
 } else {
     echo "Error al guardar la novela: " . $conn->error;
 }
 
-// Cerrar conexión
+// Cerrar declaración y conexión
+$stmt->close();
 $conn->close();
 ?>
