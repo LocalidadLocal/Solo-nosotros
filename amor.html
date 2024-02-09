@@ -6,139 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noche de Estrellas 🌟</title>
     <style>
-    body {
-    background-color: #2c3e50;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    transition: background-color 0.5s ease;
-    overflow: hidden; /* Para ocultar las estrellas que se salgan del área visible */
-}
+        body {
+            background-color: #2c3e50;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+            overflow: hidden; /* Para ocultar las estrellas que se salgan del área visible */
+        }
 
-/* Estrellas parpadeantes */
-.stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Para que esté detrás del contenido */
-}
+        /* Estrellas parpadeantes */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Para que esté detrás del contenido */
+        }
 
-.stars:after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://image.freepik.com/vector-gratis/fondo-noche-estrellada_1048-9569.jpg'); /* Imagen de fondo */
-    background-size: 1px 1px; /* Tamaño de la estrella */
-    animation: animateStars 50s linear infinite; /* Animación de estrellas */
-}
+        .stars:after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://image.freepik.com/vector-gratis/fondo-noche-estrellada_1048-9569.jpg'); /* Imagen de fondo */
+            background-size: 1px 1px; /* Tamaño de la estrella */
+            animation: animateStars 50s linear infinite; /* Animación de estrellas */
+        }
 
-@keyframes animateStars {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 10000px 5000px; /* Desplazamiento horizontal y vertical para simular movimiento */
-    }
-}
+        @keyframes animateStars {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 10000px 5000px; /* Desplazamiento horizontal y vertical para simular movimiento */
+            }
+        }
 
-h1 {
-    color: #ecf0f1;
-    font-size: 36px; /* Tamaño del texto */
-    margin-bottom: 20px; /* Margen inferior para separarlo del resto del contenido */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
-}
+        h1 {
+            color: #ecf0f1;
+            font-size: 36px; /* Tamaño del texto */
+            margin-bottom: 20px; /* Margen inferior para separarlo del resto del contenido */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
+        }
 
-button {
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        button {
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-button:hover {
-    background-color: #2980b9;
-}
+        button:hover {
+            background-color: #2980b9;
+        }
 
-#poema {
-    display: none;
-    padding: 20px;
-    font-size: 20px;
-    font-style: italic;
-    border: 2px solid #3498db;
-    border-radius: 10px;
-    background-color: #ecf0f1;
-    margin: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 1s ease, display 1s ease;
-}
+        #poema {
+            display: none;
+            padding: 20px;
+            font-size: 20px;
+            font-style: italic;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            background-color: #ecf0f1;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease, display 1s ease;
+        }
 
-.playlist {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
+        .playlist {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
 
-.playlist button {
-    background-color: #3498db;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 16px;
-    margin: 6px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .playlist button {
+            background-color: #3498db;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px 16px;
+            margin: 6px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.playlist button:hover {
-    background-color: #2980b9;
-}
+        .playlist button:hover {
+            background-color: #2980b9;
+        }
 
-#ferPlaylist,
-#andyPlaylist {
-    flex: 1;
-    max-width: 400px;
-}
+        #ferPlaylist,
+        #andyPlaylist {
+            flex: 1;
+            max-width: 400px;
+        }
 
-.novela-link {
-    background-color: #ff6666;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+        .novela-link {
+            background-color: #ff6666;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-.novela-link:hover {
-    background-color: #ff3333;
-}
+        .novela-link:hover {
+            background-color: #ff3333;
+        }
     </style>
 </head>
 
@@ -207,8 +207,7 @@ button:hover {
         si veo algo que en ella solo me hace pensar , digo tantas cosas pero ninguna como las que te digo a ti , te amo
         y mucho...
     </div>
-        <h2>EN MANTENIMIENTO :)
-    </h2>
+    <h2>EN MANTENIMIENTO :)</h2>
 
     <button class="novela-link" onclick="window.location.href = 'novela.html'">¡Descubre nuestra historia juntos!</button>
     <button id="subirFoto" class="novela-link" onclick="window.location.href = 'subirfoto.html'">Subir Foto</button>
@@ -223,7 +222,7 @@ button:hover {
             'ymJ1svwvpLQ', 'QlZNGcVfeF0', 'x1ayw8GRJUo', 'aSjflT_J0Xo', 'U5yU2KPw1WY',
             'ZYslw-iBm8U', 'Kbyp0QQM__g', 'a1ozTSkE27U', '9QHiXsBtmmI', 'LgQYPqr9Rho',
             '85qbNFHshdY', 'dNa5gs24gis', 'jMNRg3nHwU0', 'KWGrPNqz4uc', 'f10mB6fKszU',
-            'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ','b1cbgrcBrY0','hf5oi2c_jjM'
+            'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ', 'b1cbgrcBrY0', 'hf5oi2c_jjM'
         ];
         let indiceCancionActual = 0;
 
@@ -249,27 +248,28 @@ button:hover {
 
             // Agrega el iframe al cuerpo del documento
             document.body.appendChild(iframe);
-const musica = document.getElementById("musica");
-const poema = document.getElementById("poema"); // Asumiendo que tienes un elemento con id "poema"
+        };
 
-mostrarBtn.addEventListener("click", function () {
-    // Ocultar el poema si estaba visible
-    poema.style.display = "none";
+        const poemaDiv = document.querySelector("#poema"); // Cambié el nombre de la variable para evitar conflictos
 
-    // Mostrar la música
-    musica.style.display = "block";
-});
+        mostrarBtn.addEventListener("click", function () {
+            // Ocultar el poema si estaba visible
+            poemaDiv.style.display = "none";
 
-masAmorBtn.addEventListener("click", function () {
-    // Ocultar la música si estaba visible
-    musica.style.display = "none";
+            // Mostrar la música
+            musica.style.display = "block";
+        });
 
-    // Mostrar el poema
-    poema.style.display = "block";
+        masAmorBtn.addEventListener("click", function () {
+            // Ocultar la música si estaba visible
+            musica.style.display = "none";
 
-    // Redirigir después de 40 segundos
-    setTimeout(redirigir, 4000);
-});
+            // Mostrar el poema
+            poemaDiv.style.display = "block";
+
+            // Redirigir después de 40 segundos
+            setTimeout(redirigir, 4000);
+        });
 
 
         nosotrosBtn.addEventListener("click", function () {
@@ -283,6 +283,7 @@ masAmorBtn.addEventListener("click", function () {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         let player;
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0',
