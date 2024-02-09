@@ -244,6 +244,9 @@ const contenedorVideo = document.createElement("div");
 contenedorVideo.id = "contenedorVideo";
 contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
 
+// Obtén el contenedor de video
+const contenedorVideo = document.getElementById("video-container");
+
 // Crea un nuevo iframe y establece sus atributos
 const iframe = document.createElement("iframe");
 iframe.src = videoId;
@@ -255,6 +258,7 @@ iframe.id = "reproductor";
 
 // Agrega el iframe al contenedor de video
 contenedorVideo.appendChild(iframe);
+
 
 // Agrega el contenedor de video al cuerpo del documento
 document.body.appendChild(contenedorVideo);
