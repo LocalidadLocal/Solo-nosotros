@@ -7,7 +7,7 @@
     <title>Noche de Estrellas 🌟</title>
     <style>
         body {
-            background-color: #2c3e50;
+            background-color: #34495e; /* Se cambió el color de fondo */
             text-align: center;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
@@ -139,6 +139,11 @@
         .novela-link:hover {
             background-color: #ff3333;
         }
+
+        #video-container {
+            width: 70%; /* Se aumentó el ancho del video */
+            margin-top: 20px; /* Se agregó margen superior */
+        }
     </style>
 </head>
 
@@ -240,14 +245,14 @@
             contenedorVideo.id = "contenedorVideo";
             contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
 
-            // Obtén el contenedor de video CORRECTAMENTE
+            // Obtén el contenedor de video
             const contenedorVideoPadre = document.getElementById("video-container");
 
             // Crea un nuevo iframe y establece sus atributos
             const iframe = document.createElement("iframe");
             iframe.src = videoId;
-            iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
-            iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
+            iframe.style.width = "100%"; // Ancho del iframe al 100% del contenedor
+            iframe.style.height = "400px"; // Altura fija del iframe
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
             iframe.id = "reproductor";
