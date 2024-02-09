@@ -214,110 +214,99 @@
     <button class="novela-link" onclick="window.location.href = 'novela.html'">¡Descubre nuestra historia juntos!</button>
     <button id="subirFoto" class="novela-link" onclick="window.location.href = 'subirfoto.html'">Subir Foto</button>
     <script>
-        const mostrarBtn = document.querySelector("#mostrar");
-        const masAmorBtn = document.querySelector("#masAmor");
-        const nosotrosBtn = document.querySelector("#nosotros");
-        const poema = document.querySelector("#poema");
-        const ferPlaylist = document.querySelector("#ferPlaylist");
-        const andyPlaylist = document.querySelector("#andyPlaylist");
-        const listaDeReproduccion = [
-            'ymJ1svwvpLQ', 'QlZNGcVfeF0', 'x1ayw8GRJUo', 'aSjflT_J0Xo', 'U5yU2KPw1WY',
-            'ZYslw-iBm8U', 'Kbyp0QQM__g', 'a1ozTSkE27U', '9QHiXsBtmmI', 'LgQYPqr9Rho',
-            '85qbNFHshdY', 'dNa5gs24gis', 'jMNRg3nHwU0', 'KWGrPNqz4uc', 'f10mB6fKszU',
-            'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ', 'b1cbgrcBrY0', 'hf5oi2c_jjM'
-        ];
-        let indiceCancionActual = 0;
+    const mostrarBtn = document.querySelector("#mostrar");
+    const masAmorBtn = document.querySelector("#masAmor");
+    const nosotrosBtn = document.querySelector("#nosotros");
+    const poema = document.querySelector("#poema");
+    const ferPlaylist = document.querySelector("#ferPlaylist");
+    const andyPlaylist = document.querySelector("#andyPlaylist");
+    const listaDeReproduccion = [
+        'ymJ1svwvpLQ', 'QlZNGcVfeF0', 'x1ayw8GRJUo', 'aSjflT_J0Xo', 'U5yU2KPw1WY',
+        'ZYslw-iBm8U', 'Kbyp0QQM__g', 'a1ozTSkE27U', '9QHiXsBtmmI', 'LgQYPqr9Rho',
+        '85qbNFHshdY', 'dNa5gs24gis', 'jMNRg3nHwU0', 'KWGrPNqz4uc', 'f10mB6fKszU',
+        'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ', 'b1cbgrcBrY0', 'hf5oi2c_jjM'
+    ];
+    let indiceCancionActual = 0;
 
-        const redirigir = function () {
-            window.location.href = "https://youtu.be/vN6oReb9Avg?list=RDMM";
-        };
+    const reproducir = function (videoId) {
+        // Elimina cualquier contenedor de video existente antes de crear uno nuevo
+        const contenedorVideoExistente = document.querySelector("#contenedorVideo");
+        if (contenedorVideoExistente) {
+            contenedorVideoExistente.remove();
+        }
 
-        const reproducir = function (videoId) {
-         // Elimina cualquier contenedor de video existente antes de crear uno nuevo
-const contenedorVideoExistente = document.querySelector("#contenedorVideo");
-if (contenedorVideoExistente) {
-    contenedorVideoExistente.remove();
-}
+        // Crea un nuevo contenedor para el video y establece sus atributos
+        const contenedorVideo = document.createElement("div");
+        contenedorVideo.id = "contenedorVideo";
+        contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
 
-// Crea un nuevo contenedor para el video y establece sus atributos
-const contenedorVideo = document.createElement("div");
-contenedorVideo.id = "contenedorVideo";
-contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
+        // Obtén el contenedor de video
+        const contenedorVideo = document.getElementById("video-container");
 
-// Obtén el contenedor de video
-const contenedorVideo = document.getElementById("video-container");
+        // Crea un nuevo iframe y establece sus atributos
+        const iframe = document.createElement("iframe");
+        iframe.src = videoId;
+        iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
+        iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.id = "reproductor";
 
-// Crea un nuevo iframe y establece sus atributos
-const iframe = document.createElement("iframe");
-iframe.src = videoId;
-iframe.style.maxWidth = "100%"; // Ancho máximo del iframe al 100% del contenedor
-iframe.style.height = "auto"; // Altura ajustada automáticamente al ancho del contenedor
-iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-iframe.allowFullscreen = true;
-iframe.id = "reproductor";
+        // Agrega el iframe al contenedor de video
+        contenedorVideo.appendChild(iframe);
 
-// Agrega el iframe al contenedor de video
-contenedorVideo.appendChild(iframe);
+        // Agrega el contenedor de video al cuerpo del documento
+        document.body.appendChild(contenedorVideo);
+    };
 
+    const reproducirSiguiente = function () {
+        indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
+        reproducir(listaDeReproduccion[indiceCancionActual]);
+    };
 
-// Agrega el contenedor de video al cuerpo del documento
-document.body.appendChild(contenedorVideo);
+    mostrarBtn.addEventListener("click", function () {
+        poema.style.display = "block"; // Mostrar el poema
+        ferPlaylist.style.opacity = 0; // Ocultar la lista de reproducción de Fer
+        andyPlaylist.style.opacity = 0; // Ocultar la lista de reproducción de Andy
+    });
 
-        };
+    masAmorBtn.addEventListener("click", function () {
+        reproducirSiguiente(); // Reproducir la siguiente canción en la lista
+    });
 
-        const reproducirSiguiente = function () {
-            indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
-            reproducir(listaDeReproduccion[indiceCancionActual]);
-        };
-
-  mostrarBtn.addEventListener("click", function () {
-    const opcion = "música"; // Establecer la opción como música
-    alert("Se mostrará " + opcion);
-    if (opcion === "música") {
+    nosotrosBtn.addEventListener("click", function () {
         ferPlaylist.style.opacity = 1;
         andyPlaylist.style.opacity = 1;
-        poema.style.display = "none"; // Ocultar el poema si estaba visible
-    }
-});
+    });
 
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        masAmorBtn.addEventListener("click", function () {
-            poema.style.display = "block";
-            setTimeout(redirigir, 400);
-        });
-
-        nosotrosBtn.addEventListener("click", function () {
-            ferPlaylist.style.opacity = 1;
-            andyPlaylist.style.opacity = 1;
-        });
-
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // event.target.playVideo();
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                reproducirSiguiente();
+    let player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '0',
+            width: '0',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
             }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+            reproducirSiguiente();
         }
-    </script>
+    }
+</script>
+
 </body>
 
 </html>
