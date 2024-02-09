@@ -251,15 +251,15 @@
         const reproducirSiguiente = function () {
             indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
             reproducir(listaDeReproduccion[indiceCancionActual]);
-        };
+      const musica = document.getElementById("musica");
 
-        mostrarBtn.addEventListener("click", function () {
-            const opcion = Math.random() < 0.5 ? "música" : "poema";
-            alert("Se mostrará un " + opcion);
-            if (opcion === "poema") {
-                poema.style.display = "block";
-            }
-        });
+mostrarBtn.addEventListener("click", function () {
+    // Ocultar el poema si estaba visible
+    poema.style.display = "none";
+
+    // Mostrar la música
+    musica.style.display = "block";
+});
 
         masAmorBtn.addEventListener("click", function () {
             poema.style.display = "block";
