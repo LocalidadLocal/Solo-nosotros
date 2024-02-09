@@ -247,8 +247,12 @@
             // Crea un nuevo iframe y establece sus atributos
             const iframe = document.createElement("iframe");
             iframe.src = videoId;
-            iframe.style.maxWidth = "800px"; // Ancho máximo del iframe al 100% del contenedor
-            iframe.style.height = "450px"; // Altura ajustada automáticamente al ancho del contenedor
+           // Obtén el ancho de la pantalla
+const screenWidth = window.innerWidth;
+
+// Establece el ancho del iframe según el ancho de la pantalla
+iframe.style.width = screenWidth > 560 ? "560px" : "100%"; // Si el ancho de la pantalla es mayor que 560px, establece el ancho del iframe en 560px, de lo contrario, establece el ancho en 100% del ancho de la pantalla
+iframe.style.height = screenWidth > 560 ? "315px" : "auto"; // Si el ancho de la pantalla es mayor que 560px, establece el alto del iframe en 315px, de lo contrario, deja que el alto se ajuste automáticamente
             iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
             iframe.allowFullscreen = true;
             iframe.id = "reproductor";
