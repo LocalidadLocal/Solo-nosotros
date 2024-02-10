@@ -141,7 +141,50 @@
 
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
-    <script>
+    <script> document.addEventListener('DOMContentLoaded', function () {
+        const buscarNovelaInput = document.getElementById('buscarNovela');
+        const listaNovelas = document.getElementById('listaNovelas');
+        const guardarNovelaBtn = document.getElementById('guardarNovelaBtn');
+        const borrarNovelaBtn = document.getElementById('borrarNovelaBtn');
+        const messageContainer = document.getElementById('message-container');
+
+        // Función para mostrar las novelas en la lista
+        function mostrarNovelas(novelas) {
+            listaNovelas.innerHTML = ''; // Limpiar la lista antes de agregar los resultados
+
+            novelas.forEach(novela => {
+                const novelaItem = document.createElement('li');
+                novelaItem.textContent = novela.titulo + ': ' + novela.contenido;
+                listaNovelas.appendChild(novelaItem);
+            });
+        }
+
+        // Evento de clic para el botón de búsqueda
+        document.getElementById('buscarNovelaBtn').addEventListener('click', function () {
+            const tituloBuscado = buscarNovelaInput.value.trim().toLowerCase();
+
+            if (tituloBuscado === '') {
+                // Si no se ingresa ningún término de búsqueda, mostrar todas las novelas
+                firebase.database().ref('novelas').once('value')
+                    .then(snapshot => {
+                        const novelas = [];
+                        snapshot.forEach(childSnapshot => {
+                            novelas.push(childSnapshot.val());
+                        });
+                        mostrarNovelas(novelas);
+                    });
+            } else {
+                // Buscar las novelas que coincidan con el término de búsqueda
+                firebase.database().ref('novelas').orderByChild('titulo').startAt(tituloBuscado).endAt(tituloBuscado + '\uf8ff').once('value')
+                    .then(snapshot => {
+                        const novelas = [];
+                        snapshot.forEach(childSnapshot => {
+                            novelas.push(childSnapshot.val());
+                        });
+                        mostrarNovelas(novelas);
+                    });
+            }
+        });
         const firebaseConfig = {
              apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
   authDomain: "archivos-nosotros.firebaseapp.com",
