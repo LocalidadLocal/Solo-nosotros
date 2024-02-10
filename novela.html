@@ -119,6 +119,11 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
+
+        #message-container {
+            color: #333;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -136,20 +141,23 @@
         <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
         <button id="guardarNovelaBtn">Guardar Novela</button>
         <button id="borrarNovelaBtn">Borrar Novela</button>
-        <div id="message-container"></div>
     </div>
+
+    <!-- Mensaje de resultado de la operación -->
+    <div id="message-container"></div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
     <script>
-        const firebaseConfig = {
-             apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
+       const firebaseConfig = {
+  apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
   authDomain: "archivos-nosotros.firebaseapp.com",
+  databaseURL: "https://archivos-nosotros-default-rtdb.firebaseio.com",
   projectId: "archivos-nosotros",
   storageBucket: "archivos-nosotros.appspot.com",
   messagingSenderId: "551014569165",
   appId: "1:551014569165:web:2bf5174973877c4aa04584",
-  measurementId: "G-L9CYNFGWD9"
+  measurementId: "G-L9CYNFGWD9
         };
 
         // Inicializar Firebase
@@ -165,7 +173,7 @@
             const borrarNovelaBtn = document.getElementById('borrarNovelaBtn');
             const messageContainer = document.getElementById('message-container');
 
-            // Función para cargar y mostrar las novelas
+            // Función para mostrar las novelas
             function mostrarNovelas(novelas) {
                 let htmlNovelas = '';
                 novelas.forEach(novela => {
@@ -214,16 +222,18 @@
                         contenido: contenido,
                         password: password
                     })
-                    .then(() => {
-                        messageContainer.textContent = 'Novela guardada con éxito.';
-                        // Limpiar los campos después de guardar la novela
-                        tituloNovela.value = '';
-                        contenidoNovela.value = '';
-                        passwordNovela.value = '';
-                    })
-                    .catch(error => {
-                        messageContainer.textContent = 'Error al guardar la novela: ' + error.message;
-                    });
+                        .then(() => {
+                            // Mensaje de éxito
+                            messageContainer.textContent = 'Novela guardada con éxito.';
+                            // Limpiar los campos después de guardar la novela
+                            tituloNovela.value = '';
+                            contenidoNovela.value = '';
+                            passwordNovela.value = '';
+                        })
+                        .catch(error => {
+                            // Mensaje de error
+                            messageContainer.textContent = 'Error al guardar la novela: ' + error.message;
+                        });
                 } else {
                     messageContainer.textContent = 'Por favor, complete todos los campos.';
                 }
