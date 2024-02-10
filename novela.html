@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novela de Nuestra Vida 💕</title>
+    <title>Biblioteca de Novelas 💕</title>
     <style>
         body {
             background-color: #ffe6e6;
@@ -45,7 +45,7 @@
             background-color: #ff3333;
         }
 
-        #novela {
+        #biblioteca {
             background-color: #fff0f0;
             border: 2px solid #ff6666;
             border-radius: 10px;
@@ -58,44 +58,41 @@
             color: #333;
         }
 
-        #novela textarea {
-            width: calc(100% - 22px);
-            height: 200px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ff6666;
-            resize: none;
-            color: #333;
-            background-color: #ffe6e6;
+        #biblioteca ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
 
-        #novela input[type="text"],
-        #novela textarea {
-            font-size: 16px;
-            font-family: 'Arial', sans-serif;
+        #biblioteca li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        #buscarNovela {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 
 <body>
-    <div id="novela">
-        <h1>Novela de Nuestra Vida 💕</h1>
-        <input type="text" id="tituloNovela" placeholder="Título de la novela">
-        <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..." rows="10" cols="50"></textarea>
-        <br>
-        <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
-        <br>
-        <button id="guardarNovelaBtn">Guardar Novela</button>
-        <button id="borrarNovelaBtn">Borrar Novela</button>
-        <div id="message-container"></div>
-    </div>
+    <h1>Biblioteca de Novelas 💕</h1>
+    <input type="text" id="buscarNovela" placeholder="Buscar novela por título...">
+    <div id="biblioteca"></div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
     <script>
         const firebaseConfig = {
-            apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
+              apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
   authDomain: "archivos-nosotros.firebaseapp.com",
   projectId: "archivos-nosotros",
   storageBucket: "archivos-nosotros.appspot.com",
@@ -107,58 +104,54 @@
         firebase.initializeApp(firebaseConfig);
 
         document.addEventListener('DOMContentLoaded', function () {
-            const tituloNovela = document.getElementById('tituloNovela');
-            const contenidoNovela = document.getElementById('contenidoNovela');
-            const passwordNovela = document.getElementById('passwordNovela');
-            const guardarNovelaBtn = document.getElementById('guardarNovelaBtn');
-            const borrarNovelaBtn = document.getElementById('borrarNovelaBtn');
-            const messageContainer = document.getElementById('message-container');
+            const buscarNovelaInput = document.getElementById('buscarNovela');
+            const bibliotecaDiv = document.getElementById('biblioteca');
 
-            guardarNovelaBtn.addEventListener('click', function () {
-                const titulo = tituloNovela.value;
-                const contenido = contenidoNovela.value;
+            // Función para cargar y mostrar las novelas
+            function mostrarNovelas(novelas) {
+                let htmlNovelas = '';
+                novelas.forEach(novela => {
+                    htmlNovelas += `<li><strong>${novela.titulo}</strong>: ${novela.contenido}</li>`;
+                });
+                bibliotecaDiv.innerHTML = `<ul>${htmlNovelas}</ul>`;
+            }
 
-                if (titulo && contenido) {
-                    const novelasRef = firebase.database().ref('novelas');
-                    novelasRef.push({
-                        titulo: titulo,
-                        contenido: contenido
-                    })
-                        .then(() => {
-                            messageContainer.textContent = 'Novela guardada con éxito.';
-                        })
-                        .catch(error => {
-                            messageContainer.textContent = 'Error al guardar la novela: ' + error.message;
+            // Función para buscar novelas en tiempo real
+            buscarNovelaInput.addEventListener('input', function () {
+                const tituloBuscado = buscarNovelaInput.value.trim().toLowerCase();
+
+                if (tituloBuscado === '') {
+                    // Mostrar todas las novelas si no se ingresa ningún término de búsqueda
+                    firebase.database().ref('novelas').once('value')
+                        .then(snapshot => {
+                            const novelas = [];
+                            snapshot.forEach(childSnapshot => {
+                                novelas.push(childSnapshot.val());
+                            });
+                            mostrarNovelas(novelas);
                         });
                 } else {
-                    messageContainer.textContent = 'Por favor, complete todos los campos.';
+                    // Filtrar las novelas por título
+                    firebase.database().ref('novelas').orderByChild('titulo').startAt(tituloBuscado).endAt(tituloBuscado + '\uf8ff').once('value')
+                        .then(snapshot => {
+                            const novelas = [];
+                            snapshot.forEach(childSnapshot => {
+                                novelas.push(childSnapshot.val());
+                            });
+                            mostrarNovelas(novelas);
+                        });
                 }
             });
 
-            borrarNovelaBtn.addEventListener('click', function () {
-                const titulo = tituloNovela.value;
-                const password = passwordNovela.value;
-
-                if (titulo && password) {
-                    const novelasRef = firebase.database().ref('novelas');
-                    novelasRef.orderByChild('titulo').equalTo(titulo).once('value', function (snapshot) {
-                        snapshot.forEach(function (child) {
-                            const novela = child.val();
-                            if (novela.password === password) {
-                                child.ref.remove();
-                                messageContainer.textContent = 'Novela borrada con éxito.';
-                            } else {
-                                messageContainer.textContent = 'Contraseña incorrecta. No se pudo borrar la novela.';
-                            }
-                        });
-                    })
-                        .catch(error => {
-                            messageContainer.textContent = 'Error al borrar la novela: ' + error.message;
-                        });
-                } else {
-                    messageContainer.textContent = 'Por favor, ingrese el título de la novela y la contraseña para borrar.';
-                }
-            });
+            // Cargar y mostrar todas las novelas al cargar la página
+            firebase.database().ref('novelas').once('value')
+                .then(snapshot => {
+                    const novelas = [];
+                    snapshot.forEach(childSnapshot => {
+                        novelas.push(childSnapshot.val());
+                    });
+                    mostrarNovelas(novelas);
+                });
         });
     </script>
 </body>
