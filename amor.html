@@ -5,153 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noche de Estrellas 🌟</title>
-    <style>
-body {
-    background: linear-gradient(to bottom, #2c3e50, #000000); /* Un gradiente de colores para un fondo más interesante */
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    transition: background-color 0.5s ease;
-    overflow: auto; /* Mostrar barras de desplazamiento cuando sea necesario */
-}
-
-/* Estrellas parpadeantes */
-.stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Para que esté detrás del contenido */
-}
-
-.stars:after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://image.freepik.com/vector-gratis/fondo-noche-estrellada_1048-9569.jpg'); /* Imagen de fondo */
-    background-size: 1px 1px; /* Tamaño de la estrella */
-    animation: animateStars 50s linear infinite; /* Animación de estrellas */
-}
-
-@keyframes animateStars {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 10000px 5000px; /* Desplazamiento horizontal y vertical para simular movimiento */
-    }
-}
-
-h1 {
-    color: #ecf0f1;
-    font-size: 36px; /* Tamaño del texto */
-    margin-bottom: 20px; /* Margen inferior para separarlo del resto del contenido */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
-}
-
-button {
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-#poema {
-    display: none;
-    padding: 20px;
-    font-size: 20px;
-    font-style: italic;
-    border: 2px solid #3498db;
-    border-radius: 10px;
-    background-color: #ecf0f1;
-    margin: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 1s ease, display 1s ease;
-}
-
-.playlist {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-.playlist button {
-    background-color: #3498db;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 16px;
-    margin: 6px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.playlist button:hover {
-    background-color: #2980b9;
-}
-
-#ferPlaylist,
-#andyPlaylist {
-    flex: 1;
-    max-width: 400px;
-}
-
-.novela-link {
-    background-color: #ff6666;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.novela-link:hover {
-    background-color: #ff3333;
-}
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="stars"></div>
     <h1>Noche de Estrellas 🌟</h1>
-   <div>
-    <button id="mostrar">¡Mostrar Música o Poema! 🎶</button>
-       <button id="nosotros">¡Nosotros! 💑</button>
-       <button onclick="reproducir('https://www.youtube.com/embed/2oooF0_1390')">¡Más Amor uwu! 😍</button>
-    <button onclick="reproducir('https://www.youtube.com/embed/biUYbAk-S1w')">¡Bésame! 💋</button>
-</div>
+    <div>
+        <button id="mostrar">¡Mostrar Música o Poema! 🎶</button>
+        <button id="nosotros">¡Nosotros! 💑</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/2oooF0_1390')">¡Más Amor uwu! 😍</button>
+        <button onclick="reproducir('https://www.youtube.com/embed/biUYbAk-S1w')">¡Bésame! 💋</button>
+    </div>
 
     <div id="ferPlaylist" class="playlist">
         <button onclick="reproducir('https://www.youtube.com/embed/ymJ1svwvpLQ')">Fer 1</button>
@@ -181,136 +46,41 @@ button:hover {
 
     <div id="poema">
         Mi amor por ti es tan grande,
-que ni los cielos lo pueden alcanzar.
-Eres la luz que ilumina mi camino,
-la razón por la que sonrío cada día.
+        que ni los cielos lo pueden alcanzar.
+        Eres la luz que ilumina mi camino,
+        la razón por la que sonrío cada día.
 
-Eres mi confidente, mi amiga, mi amante,
-mi todo en una sola persona.
-Eres mi complemento perfecto,
-la persona con la que quiero pasar el resto de mi vida.
+        Eres mi confidente, mi amigo, mi amante,
+        mi todo en una sola persona.
+        Eres mi complemento perfecto,
+        la persona con la que quiero pasar el resto de mi vida.
 
-Tu belleza es tan cautivadora,
-que no puedo resistir mirarte.
-Tu risa es como música para mis oídos,
-y tu voz es como una melodía celestial.
+        Tu belleza es tan cautivadora,
+        que no puedo resistir mirarte.
+        Tu risa es como música para mis oídos,
+        y tu voz es como una melodía celestial.
 
-Quiero ser la mujer que te haga sonreír,
-la que te proteja y te haga sentir amada.
-Quiero estar a tu lado para siempre,
-y hacerte sentir la mujer más afortunada del mundo.
+        Quiero ser la mujer que te haga sonreír,
+        la que te proteja y te haga sentir amado.
+        Quiero estar a tu lado para siempre,
+        y hacerte sentir el hombre más afortunado del mundo.
 
-Eres mi todo, mi razón de ser,
-mi amor eterno y verdadero.
-Te amo más allá de las palabras,
-y espero que nunca lo dudes. ESPERA UN POCO POR FAVOR....
-enserio, espera, siempre fuiste lo más bonito que vieron mis ojos
-que sentí algo por ti, mis ojos brillaron y lo sé, nada así me sucedió antes, después de ser mi todo
-quiero que seas mi vida, quiero que seas lo único bello en mi vida
-tal vez sea raro y empalagoso mi forma de ser y actuar pero no sé expresarme
-si veo algo que en ella solo me hace pensar, digo tantas cosas pero ninguna como las que te digo a ti, te amo
-y mucho...
+        Eres mi todo, mi razón de ser,
+        mi amor eterno y verdadero.
+        Te amo más allá de las palabras,
+        y espero que nunca lo dudes. ESPERA UN POCO POR FAVOR....
+        enserio , espera , siempre fuiste lo mas bonito que vieron mis ojos 
+        que senti algo port ti , mis ojos brillaron y lo se , nada asi me sucedio antes , despues de ser mi todo
+        quiero que seas mi vida , quiero que seas lo unico bello en mi vida
+        talves sea raro y empalagoso mi forma de ser y actuar pero no me se expresar
+        si veo algo que en ella solo me hace pensar , digo tantas cosas pero ninguna como las que te digo a ti , te amo
+        y mucho...
     </div>
     <h2>EN MANTENIMIENTO :0</h2>
 
     <button class="novela-link" onclick="window.location.href = 'novela.html'">¡Descubre nuestra historia juntos!</button>
     <button id="subirFoto" class="novela-link" onclick="window.location.href = 'subirfoto.html'">Subir Foto</button>
-    <script>
-        const mostrarBtn = document.querySelector("#mostrar");
-        const nosotrosBtn = document.querySelector("#nosotros");
-        const poema = document.querySelector("#poema");
-        const ferPlaylist = document.querySelector("#ferPlaylist");
-        const andyPlaylist = document.querySelector("#andyPlaylist");
-        const listaDeReproduccion = [
-            'ymJ1svwvpLQ', 'QlZNGcVfeF0', 'x1ayw8GRJUo', 'aSjflT_J0Xo', 'U5yU2KPw1WY',
-            'ZYslw-iBm8U', 'Kbyp0QQM__g', 'a1ozTSkE27U', '9QHiXsBtmmI', 'LgQYPqr9Rho',
-            '85qbNFHshdY', 'dNa5gs24gis', 'jMNRg3nHwU0', 'KWGrPNqz4uc', 'f10mB6fKszU',
-            'aBSkvI0CkgU', '_6XzJPyAJDI', '4THFRpw68oQ', 'b1cbgrcBrY0', 'hf5oi2c_jjM',
-        ];
-        let indiceCancionActual = 0;
-
-        const reproducir = function (videoId) {
-            // Elimina cualquier contenedor de video existente antes de crear uno nuevo
-            const contenedorVideoExistente = document.querySelector("#contenedorVideo");
-            if (contenedorVideoExistente) {
-                contenedorVideoExistente.remove();
-            }
-
-            // Crea un nuevo contenedor para el video y establece sus atributos
-            const contenedorVideo = document.createElement("div");
-            contenedorVideo.id = "contenedorVideo";
-            contenedorVideo.style.textAlign = "center"; // Centra el video horizontalmente
-
-            // Obtén el contenedor de video
-            const contenedorVideoPadre = document.getElementById("video-container");
-
-            // Crea un nuevo iframe y establece sus atributos
-            const iframe = document.createElement("iframe");
-            iframe.src = videoId;
-           // Obtén el ancho de la pantalla
-const screenWidth = window.innerWidth;
-
-// Establece el ancho del iframe según el ancho de la pantalla
-iframe.style.width = screenWidth > 560 ? "560px" : "100%"; // Si el ancho de la pantalla es mayor que 560px, establece el ancho del iframe en 560px, de lo contrario, establece el ancho en 100% del ancho de la pantalla
-iframe.style.height = screenWidth > 560 ? "315px" : "auto"; // Si el ancho de la pantalla es mayor que 560px, establece el alto del iframe en 315px, de lo contrario, deja que el alto se ajuste automáticamente
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-            iframe.allowFullscreen = true;
-            iframe.id = "reproductor";
-
-            // Agrega el iframe al contenedor de video
-            contenedorVideo.appendChild(iframe);
-
-            // Agrega el contenedor de video al cuerpo del documento
-            contenedorVideoPadre.appendChild(contenedorVideo);
-        };
-
-        const reproducirSiguiente = function () {
-            indiceCancionActual = (indiceCancionActual + 1) % listaDeReproduccion.length;
-            reproducir(listaDeReproduccion[indiceCancionActual]);
-        };
-
-        mostrarBtn.addEventListener("click", function () {
-            poema.style.display = "block"; // Mostrar el poema
-            ferPlaylist.style.opacity = 0; // Ocultar la lista de reproducción de Fer
-            andyPlaylist.style.opacity = 0; // Ocultar la lista de reproducción de Andy
-        });
-
-      
-        nosotrosBtn.addEventListener("click", function () {
-            ferPlaylist.style.opacity = 1;
-            andyPlaylist.style.opacity = 1;
-        });
-
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            
-});
-
-        }
-
-        function onPlayerReady(event) {
-            // event.target.playVideo();
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                reproducirSiguiente();
-            }
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
