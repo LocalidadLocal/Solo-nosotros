@@ -1,80 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Archivos</title>
+    <title>Galería de Archivos</title>
     <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f3f4f6;
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+        }
 
-#upload-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+        #upload-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
 
-/* Estilos adicionales */
-h1 {
-    color: #333;
-    margin-bottom: 20px;
-}
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
 
-/* Estilos para el botón de subir archivo */
-#file-container {
-    margin-bottom: 20px;
-}
+        #file-container {
+            margin-bottom: 20px;
+        }
 
-#file-input {
-    display: none;
-}
+        #file-input {
+            display: none;
+        }
 
-#file-label {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        #file-label {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-#file-label span {
-    vertical-align: middle;
-}
+        #file-label span {
+            vertical-align: middle;
+        }
 
-#file-label:hover {
-    background-color: #45a049;
-}
+        #file-label:hover {
+            background-color: #45a049;
+        }
 
-#upload-btn {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        #upload-btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-#upload-btn:hover {
-    background-color: #45a049;
-}
+        #upload-btn:hover {
+            background-color: #45a049;
+        }
 
-#message-container {
-    margin-top: 10px;
-    color: #333;
-}
+        #message-container {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        #gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery-item {
+            margin: 10px;
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
+
 <body>
     <div id="upload-container">
         <h1>Subir Archivos</h1>
@@ -86,17 +109,19 @@ h1 {
         <div id="message-container"></div>
     </div>
 
+    <div id="gallery"></div>
+
     <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js"></script>
     <script>
         // Configuración de Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
-            authDomain: "archivos-nosotros.firebaseapp.com",
-            projectId: "archivos-nosotros",
-            storageBucket: "archivos-nosotros.appspot.com",
-            messagingSenderId: "551014569165",
-            appId: "1:551014569165:web:e585b644c23c30c6a04584"
+            apiKey: "TU_API_KEY",
+            authDomain: "TU_AUTH_DOMAIN",
+            projectId: "TU_PROJECT_ID",
+            storageBucket: "TU_STORAGE_BUCKET",
+            messagingSenderId: "TU_MESSAGING_SENDER_ID",
+            appId: "TU_APP_ID"
         };
       
         // Inicializar Firebase
@@ -109,6 +134,7 @@ h1 {
             const fileInput = document.getElementById('file-input');
             const uploadBtn = document.getElementById('upload-btn');
             const messageContainer = document.getElementById('message-container');
+            const gallery = document.getElementById('gallery');
         
             uploadBtn.addEventListener('click', function () {
                 const file = fileInput.files[0];
@@ -123,6 +149,27 @@ h1 {
                     fileRef.put(file)
                     .then(snapshot => {
                         messageContainer.textContent = 'Archivo subido con éxito.';
+                        // Mostrar el archivo subido en la galería
+                        fileRef.getDownloadURL().then(function(url) {
+                            const galleryItem = document.createElement('div');
+                            galleryItem.classList.add('gallery-item');
+                            if (file.type.includes('image')) {
+                                const img = document.createElement('img');
+                                img.src = url;
+                                galleryItem.appendChild(img);
+                            } else if (file.type.includes('video')) {
+                                const video = document.createElement('video');
+                                video.src = url;
+                                video.setAttribute('controls', '');
+                                galleryItem.appendChild(video);
+                            } else {
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.textContent = file.name;
+                                galleryItem.appendChild(link);
+                            }
+                            gallery.appendChild(galleryItem);
+                        });
                     })
                     .catch(error => {
                         messageContainer.textContent = 'Error al subir el archivo: ' + error.message;
@@ -134,4 +181,5 @@ h1 {
         });
     </script>
 </body>
+
 </html>
