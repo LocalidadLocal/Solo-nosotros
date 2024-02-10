@@ -134,72 +134,66 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js"></script>
     <script>
-        // Configuración de Firebase
-        const firebaseConfig = {
-           apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
-  authDomain: "archivos-nosotros.firebaseapp.com",
-  projectId: "archivos-nosotros",
-  storageBucket: "archivos-nosotros.appspot.com",
-  messagingSenderId: "551014569165",
-  appId: "1:551014569165:web:e585b644c23c30c6a04584",
-  measurementId: "G-K52XV9T63N"
-        };
-      
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-      
-        // Referencia al servicio Storage de Firebase
-        const storage = firebase.storage();
+      document.addEventListener('DOMContentLoaded', function () {
+    const fileInput = document.getElementById('file-input');
+    const uploadBtn = document.getElementById('upload-btn');
+    const messageContainer = document.getElementById('message-container');
+    const gallery = document.getElementById('gallery');
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const fileInput = document.getElementById('file-input');
-            const uploadBtn = document.getElementById('upload-btn');
-            const messageContainer = document.getElementById('message-container');
-            const gallery = document.getElementById('gallery');
-        
-            uploadBtn.addEventListener('click', function () {
-                const file = fileInput.files[0];
-        
-                if (file) {
-                    // Referencia al directorio de almacenamiento en Firebase
-                    const storageRef = storage.ref();
-                    // Ruta donde se guardará el archivo en Firebase Storage
-                    const fileRef = storageRef.child(file.name);
-        
-                    // Subir archivo al directorio en Firebase Storage
-                    fileRef.put(file)
-                    .then(snapshot => {
-                        messageContainer.textContent = 'Archivo subido con éxito.';
-                        // Mostrar el archivo subido en la galería
-                        fileRef.getDownloadURL().then(function(url) {
-                            const galleryItem = document.createElement('div');
-                            galleryItem.classList.add('gallery-item');
-                            if (file.type.includes('image')) {
-                                const img = document.createElement('img');
-                                img.src = url;
-                                galleryItem.appendChild(img);
-                            } else if (file.type.includes('video')) {
-                                const video = document.createElement('video');
-                                video.src = url;
-                                video.setAttribute('controls', '');
-                                galleryItem.appendChild(video);
-                            } else {
-                                const link = document.createElement('a');
-                                link.href = url;
-                                link.textContent = file.name;
-                                galleryItem.appendChild(link);
-                            }
-                            gallery.appendChild(galleryItem);
-                        });
-                    })
-                    .catch(error => {
-                        messageContainer.textContent = 'Error al subir el archivo: ' + error.message;
+    uploadBtn.addEventListener('click', function () {
+        const file = fileInput.files[0];
+
+        if (file) {
+            // Referencia al directorio de almacenamiento en Firebase
+            const storageRef = storage.ref();
+            // Ruta donde se guardará el archivo en Firebase Storage
+            const fileRef = storageRef.child(file.name);
+
+            // Subir archivo al directorio en Firebase Storage
+            const uploadTask = fileRef.put(file);
+
+            uploadTask.on('state_changed', 
+                function(snapshot){
+                    // Observa el progreso de la carga del archivo
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                }, 
+                function(error) {
+                    // Manejar errores durante la carga del archivo
+                    messageContainer.textContent = 'Error al subir el archivo: ' + error.message;
+                }, 
+                function() {
+                    // La carga del archivo se completó con éxito
+                    messageContainer.textContent = 'Archivo subido con éxito.';
+                    // Mostrar el archivo subido en la galería
+                    fileRef.getDownloadURL().then(function(url) {
+                        const galleryItem = document.createElement('div');
+                        galleryItem.classList.add('gallery-item');
+                        if (file.type.includes('image')) {
+                            const img = document.createElement('img');
+                            img.src = url;
+                            galleryItem.appendChild(img);
+                        } else if (file.type.includes('video')) {
+                            const video = document.createElement('video');
+                            video.src = url;
+                            video.setAttribute('controls', '');
+                            galleryItem.appendChild(video);
+                        } else {
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.textContent = file.name;
+                            galleryItem.appendChild(link);
+                        }
+                        gallery.appendChild(galleryItem);
                     });
-                } else {
-                    messageContainer.textContent = 'Seleccione un archivo para subir.';
                 }
-            });
-        });
+            );
+        } else {
+            messageContainer.textContent = 'Seleccione un archivo para subir.';
+        }
+    });
+});
+
     </script>
 </body>
 
