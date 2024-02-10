@@ -6,76 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novela de Nuestra Vida 💕</title>
     <style>
- body {
-    background-color: #ffe6e6;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    transition: background-color 0.5s ease;
-    color: #333;
-}
+        body {
+            background-color: #ffe6e6;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+            color: #333;
+        }
 
-/* Estilos adicionales */
-h1 {
-    color: #ff9999;
-    margin-bottom: 20px;
-}
+        /* Estilos adicionales */
+        h1 {
+            color: #ff9999;
+            margin-bottom: 20px;
+        }
 
-button {
-    background-color: #ff6666;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        button {
+            background-color: #ff6666;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-button:hover {
-    background-color: #ff3333;
-}
+        button:hover {
+            background-color: #ff3333;
+        }
 
-#novela {
-    background-color: #fff0f0;
-    border: 2px solid #ff6666;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: opacity 1s ease;
-    color: #333;
-}
+        #novela {
+            background-color: #fff0f0;
+            border: 2px solid #ff6666;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 1s ease;
+            color: #333;
+        }
 
-#novela textarea {
-    width: calc(100% - 22px);
-    height: 200px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ff6666;
-    resize: none;
-    color: #333;
-    background-color: #ffe6e6;
-}
+        #novela textarea {
+            width: calc(100% - 22px);
+            height: 200px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ff6666;
+            resize: none;
+            color: #333;
+            background-color: #ffe6e6;
+        }
 
-#novela input[type="text"],
-#novela textarea {
-    font-size: 16px;
-    font-family: 'Arial', sans-serif;
-}
-
+        #novela input[type="text"],
+        #novela textarea {
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+        }
     </style>
 </head>
 
@@ -84,6 +83,8 @@ button:hover {
         <h1>Novela de Nuestra Vida 💕</h1>
         <input type="text" id="tituloNovela" placeholder="Título de la novela">
         <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..." rows="10" cols="50"></textarea>
+        <br>
+        <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
         <br>
         <button id="guardarNovelaBtn">Guardar Novela</button>
         <button id="borrarNovelaBtn">Borrar Novela</button>
@@ -94,7 +95,7 @@ button:hover {
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
     <script>
         const firebaseConfig = {
-    apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
+            apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
   authDomain: "archivos-nosotros.firebaseapp.com",
   projectId: "archivos-nosotros",
   storageBucket: "archivos-nosotros.appspot.com",
@@ -108,6 +109,7 @@ button:hover {
         document.addEventListener('DOMContentLoaded', function () {
             const tituloNovela = document.getElementById('tituloNovela');
             const contenidoNovela = document.getElementById('contenidoNovela');
+            const passwordNovela = document.getElementById('passwordNovela');
             const guardarNovelaBtn = document.getElementById('guardarNovelaBtn');
             const borrarNovelaBtn = document.getElementById('borrarNovelaBtn');
             const messageContainer = document.getElementById('message-container');
@@ -122,12 +124,12 @@ button:hover {
                         titulo: titulo,
                         contenido: contenido
                     })
-                    .then(() => {
-                        messageContainer.textContent = 'Novela guardada con éxito.';
-                    })
-                    .catch(error => {
-                        messageContainer.textContent = 'Error al guardar la novela: ' + error.message;
-                    });
+                        .then(() => {
+                            messageContainer.textContent = 'Novela guardada con éxito.';
+                        })
+                        .catch(error => {
+                            messageContainer.textContent = 'Error al guardar la novela: ' + error.message;
+                        });
                 } else {
                     messageContainer.textContent = 'Por favor, complete todos los campos.';
                 }
@@ -135,22 +137,26 @@ button:hover {
 
             borrarNovelaBtn.addEventListener('click', function () {
                 const titulo = tituloNovela.value;
+                const password = passwordNovela.value;
 
-                if (titulo) {
+                if (titulo && password) {
                     const novelasRef = firebase.database().ref('novelas');
                     novelasRef.orderByChild('titulo').equalTo(titulo).once('value', function (snapshot) {
                         snapshot.forEach(function (child) {
-                            child.ref.remove();
+                            const novela = child.val();
+                            if (novela.password === password) {
+                                child.ref.remove();
+                                messageContainer.textContent = 'Novela borrada con éxito.';
+                            } else {
+                                messageContainer.textContent = 'Contraseña incorrecta. No se pudo borrar la novela.';
+                            }
                         });
                     })
-                    .then(() => {
-                        messageContainer.textContent = 'Novela borrada con éxito.';
-                    })
-                    .catch(error => {
-                        messageContainer.textContent = 'Error al borrar la novela: ' + error.message;
-                    });
+                        .catch(error => {
+                            messageContainer.textContent = 'Error al borrar la novela: ' + error.message;
+                        });
                 } else {
-                    messageContainer.textContent = 'Por favor, ingrese el título de la novela a borrar.';
+                    messageContainer.textContent = 'Por favor, ingrese el título de la novela y la contraseña para borrar.';
                 }
             });
         });
