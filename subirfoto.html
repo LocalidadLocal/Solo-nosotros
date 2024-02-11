@@ -99,8 +99,15 @@ h1 {
 </head>
 
 <body>
-    <div id="upload-container">
-        <!-- Contenido del contenedor de carga aquí -->
+<div id="upload-container">
+    <h2>Subir Archivos</h2>
+    <p>Seleccione un archivo para subir:</p>
+    <input type="file" id="file-input">
+    <label for="file-input" id="file-label">
+        <span>Elegir Archivo</span>
+    </label>
+    <button id="upload-btn">Subir</button>
+    <div id="message-container"></div>
     </div>
 
     <div id="gallery"></div>
@@ -116,7 +123,7 @@ h1 {
   storageBucket: "archivos-nosotros.appspot.com",
   messagingSenderId: "551014569165",
   appId: "1:551014569165:web:e585b644c23c30c6a04584",
-  measurementId: "G-K52XV9T63N
+  measurementId: "G-K52XV9T63N"
         };
 
         // Inicializa Firebase
