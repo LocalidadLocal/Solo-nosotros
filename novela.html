@@ -129,12 +129,20 @@
 
 <body>
     <div id="biblioteca">
-        <!-- Contenido del contenedor de la biblioteca aquí -->
+            <h2>Biblioteca de Novelas 💕</h2>
+        <input type="text" id="buscarNovela" placeholder="Buscar novela por título...">
+        <ul id="listaNovelas">
+            <!-- Aquí se mostrarán las novelas -->
+        </ul>
     </div>
 
     <div id="escribir-novela">
-        <!-- Contenido del contenedor de escribir novela aquí -->
-    </div>
+        <!-- Contenido del contenedor de escribir novela aquí --> <h2>Escribir Novela 💻</h2>
+        <input type="text" id="tituloNovela" placeholder="Título de la novela">
+        <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..." rows="10" cols="50"></textarea>
+        <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
+        <button id="guardarNovelaBtn">Guardar Novela</button>
+        <button id="borrarNovelaBtn">Borrar Novela</button>/div>
 
     <!-- Mensaje de resultado de la operación -->
     <div id="message-container"></div>
