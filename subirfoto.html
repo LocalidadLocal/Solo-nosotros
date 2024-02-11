@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Archivos</title>
-    <style>
+      <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -120,13 +120,7 @@
 
 <body>
     <div id="upload-container">
-        <h1>Subir Archivos</h1>
-        <div id="file-container">
-            <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif, .mp4, .mp3" required>
-            <label for="file-input" id="file-label"><span>Elegir Archivo</span></label>
-        </div>
-        <button id="upload-btn">Subir Archivo</button>
-        <div id="message-container"></div>
+        <!-- Contenido del contenedor de carga aquí -->
     </div>
 
     <div id="gallery"></div>
@@ -134,66 +128,74 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.5/firebase-storage.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-    const fileInput = document.getElementById('file-input');
-    const uploadBtn = document.getElementById('upload-btn');
-    const messageContainer = document.getElementById('message-container');
-    const gallery = document.getElementById('gallery');
+        const firebaseConfig = {
+       apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
+  authDomain: "archivos-nosotros.firebaseapp.com",
+  databaseURL: "https://archivos-nosotros-default-rtdb.firebaseio.com",
+  projectId: "archivos-nosotros",
+  storageBucket: "archivos-nosotros.appspot.com",
+  messagingSenderId: "551014569165",
+  appId: "1:551014569165:web:e585b644c23c30c6a04584",
+  measurementId: "G-K52XV9T63N
+        };
 
-    uploadBtn.addEventListener('click', function () {
-        const file = fileInput.files[0];
+        // Inicializa Firebase
+        const app = firebase.initializeApp(firebaseConfig);
 
-        if (file) {
-            // Referencia al directorio de almacenamiento en Firebase
-            const storageRef = storage.ref();
-            // Ruta donde se guardará el archivo en Firebase Storage
-            const fileRef = storageRef.child(file.name);
+        // Obtiene una referencia al servicio de almacenamiento
+        const storage = firebase.storage(app);
 
-            // Subir archivo al directorio en Firebase Storage
-            const uploadTask = fileRef.put(file);
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('file-input');
+            const uploadBtn = document.getElementById('upload-btn');
+            const messageContainer = document.getElementById('message-container');
+            const gallery = document.getElementById('gallery');
 
-            uploadTask.on('state_changed', 
-                function(snapshot){
-                    // Observa el progreso de la carga del archivo
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
-                }, 
-                function(error) {
-                    // Manejar errores durante la carga del archivo
-                    messageContainer.textContent = 'Error al subir el archivo: ' + error.message;
-                }, 
-                function() {
-                    // La carga del archivo se completó con éxito
-                    messageContainer.textContent = 'Archivo subido con éxito.';
-                    // Mostrar el archivo subido en la galería
-                    fileRef.getDownloadURL().then(function(url) {
-                        const galleryItem = document.createElement('div');
-                        galleryItem.classList.add('gallery-item');
-                        if (file.type.includes('image')) {
-                            const img = document.createElement('img');
-                            img.src = url;
-                            galleryItem.appendChild(img);
-                        } else if (file.type.includes('video')) {
-                            const video = document.createElement('video');
-                            video.src = url;
-                            video.setAttribute('controls', '');
-                            galleryItem.appendChild(video);
-                        } else {
-                            const link = document.createElement('a');
-                            link.href = url;
-                            link.textContent = file.name;
-                            galleryItem.appendChild(link);
-                        }
-                        gallery.appendChild(galleryItem);
+            uploadBtn.addEventListener('click', function () {
+                const file = fileInput.files[0];
+
+                if (file) {
+                    // Referencia al directorio de almacenamiento en Firebase
+                    const storageRef = storage.ref();
+                    // Ruta donde se guardará el archivo en Firebase Storage
+                    const fileRef = storageRef.child(file.name);
+
+                    // Subir archivo al directorio en Firebase Storage
+                    const uploadTask = fileRef.put(file);
+
+                    uploadTask.then(snapshot => {
+                        // La carga del archivo se completó con éxito
+                        messageContainer.textContent = 'Archivo subido con éxito.';
+                        // Mostrar el archivo subido en la galería
+                        fileRef.getDownloadURL().then(url => {
+                            const galleryItem = document.createElement('div');
+                            galleryItem.classList.add('gallery-item');
+                            if (file.type.includes('image')) {
+                                const img = document.createElement('img');
+                                img.src = url;
+                                galleryItem.appendChild(img);
+                            } else if (file.type.includes('video')) {
+                                const video = document.createElement('video');
+                                video.src = url;
+                                video.setAttribute('controls', '');
+                                galleryItem.appendChild(video);
+                            } else {
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.textContent = file.name;
+                                galleryItem.appendChild(link);
+                            }
+                            gallery.appendChild(galleryItem);
+                        });
+                    }).catch(error => {
+                        // Manejar errores durante la carga del archivo
+                        messageContainer.textContent = 'Error al subir el archivo: ' + error.message;
                     });
+                } else {
+                    messageContainer.textContent = 'Seleccione un archivo para subir.';
                 }
-            );
-        } else {
-            messageContainer.textContent = 'Seleccione un archivo para subir.';
-        }
-    });
-});
-
+            });
+        });
     </script>
 </body>
 
