@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca de Novelas 💕</title>
-    <style>
+      <style>
         body {
             background-color: #ffe6e6;
             text-align: center;
@@ -129,18 +129,11 @@
 
 <body>
     <div id="biblioteca">
-        <h2>Biblioteca de Novelas 💕</h2>
-        <input type="text" id="buscarNovela" placeholder="Buscar novela por título...">
-        <ul id="listaNovelas"></ul>
+        <!-- Contenido del contenedor de la biblioteca aquí -->
     </div>
 
     <div id="escribir-novela">
-        <h2>Escribir Novela 💻</h2>
-        <input type="text" id="tituloNovela" placeholder="Título de la novela">
-        <textarea id="contenidoNovela" placeholder="Escribe aquí tu historia..." rows="10" cols="50"></textarea>
-        <input type="password" id="passwordNovela" placeholder="Contraseña para borrar">
-        <button id="guardarNovelaBtn">Guardar Novela</button>
-        <button id="borrarNovelaBtn">Borrar Novela</button>
+        <!-- Contenido del contenedor de escribir novela aquí -->
     </div>
 
     <!-- Mensaje de resultado de la operación -->
@@ -149,8 +142,8 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"></script>
     <script>
-       const firebaseConfig = {
-  apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
+        const firebaseConfig = {
+   apiKey: "AIzaSyAJIjYm_K8aq02dOSFZ80r6gTu9rtvMwc0",
   authDomain: "archivos-nosotros.firebaseapp.com",
   databaseURL: "https://archivos-nosotros-default-rtdb.firebaseio.com",
   projectId: "archivos-nosotros",
@@ -215,12 +208,10 @@
                 const contenido = contenidoNovela.value;
                 const password = passwordNovela.value;
 
-                if (titulo && contenido && password) {
-                    const novelasRef = firebase.database().ref('novelas');
-                    novelasRef.push({
+                if (titulo && contenido) {
+                    firebase.database().ref('novelas').push({
                         titulo: titulo,
-                        contenido: contenido,
-                        password: password
+                        contenido: contenido
                     })
                         .then(() => {
                             // Mensaje de éxito
@@ -235,7 +226,7 @@
                             messageContainer.textContent = 'Error al guardar la novela: ' + error.message;
                         });
                 } else {
-                    messageContainer.textContent = 'Por favor, complete todos los campos.';
+                    messageContainer.textContent = 'Por favor, complete el título y el contenido de la novela.';
                 }
             });
 
@@ -245,8 +236,7 @@
                 const password = passwordNovela.value;
 
                 if (titulo && password) {
-                    const novelasRef = firebase.database().ref('novelas');
-                    novelasRef.orderByChild('titulo').equalTo(titulo).once('value', function (snapshot) {
+                    firebase.database().ref('novelas').orderByChild('titulo').equalTo(titulo).once('value', function (snapshot) {
                         snapshot.forEach(function (child) {
                             const novela = child.val();
                             if (novela.password === password) {
